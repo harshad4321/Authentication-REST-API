@@ -2,16 +2,17 @@ import  logger  from "pino";
 import dayjs from "dayjs";
 import  config  from "config";
 
-const leve = config.get<string>('logLevel')
+const level = config.get<string>('logLevel')
 
 const log = logger({
     tranport:{
         target:'pino-pretty'
     },
-    leve,
+    level,
     base:{
         pid:false,   //(pid):processID
 
     },
-    timestamp:()=>`,"time":"${dayjs().format()}`
+    timestamp:()=>`,"time":"${dayjs().format()}`,
 })
+export default log;
