@@ -1,34 +1,43 @@
-import{Request,Response} from 'express'
-import { nanoid } from 'nanoid';
-import { CreateUserInput, ForgotPasswordInput, ResetPasswordInput, VerifyUserInput } from '../schema/user.schema';
-import { createUser, findUserByEmail, findUserById } from '../service/user.service';
-import log from '../utils/logger';
-import  sendEmail from '../utils/mailer';
+import { Request, Response } from "express";
+import { nanoid } from "nanoid";
+import {
+  CreateUserInput,
+  ForgotPasswordInput,
+  ResetPasswordInput,
+  VerifyUserInput,
+} from "../schema/user.schema";
+import {
+  createUser,
+  findUserByEmail,
+  findUserById,
+} from "../service/user.service";
+import log from "../utils/logger";
+import { sendEmail } from "../utils/mailer";
 
 export async function createUserHandler(
+  req: Request<{}, {}, CreateUserInput>,
+  res: Response
+) {
+  const body = req.body;
 
-    req: Request<{},{},CreateUserInput>,
-    res: Response)
-    {
-    const body=req.body;
+  try {
+    const user = await createUser(body);
 
-    try{
-const user =await  createUser(body);
-await sendEmail({
-   to: user.email,
-   from: "testsample@example.com",
-   subject: "Verify your email",
-   text: `verification code: ${user.verificationCode}. Id: ${user._id}`,
- });
- 
-   return res.send("User successully created")
-    }catch(e:any){
- if (e.code === 11000){
-    return res.status(409).send("Account already exists ") 
- }
- return res.status(500).send(e);
+    await sendEmail({
+      to: user.email,
+      from: "test@example.com",
+      subject: "Verify your email",
+      text: `verification code: ${user.verificationCode}. Id: ${user._id}`,
+    });
+
+    return res.send("User successfully created");
+  } catch (e: any) {
+    if (e.code === 11000) {
+      return res.status(409).send("Account already exists");
     }
 
+    return res.status(500).send(e);
+  }
 }
 
 export async function verifyUserHandler(
@@ -84,7 +93,7 @@ export async function forgotPasswordHandler(
 
   const passwordResetCode = nanoid();
 
-  user.passwordResetCode = passwordResetCode;
+  user.passwordResetCode =  passwordResetCode;
 
   await user.save();
 

@@ -5,19 +5,19 @@ import {
     Severity,
     pre,
     DocumentType,
-    // index,
+    index,
   } from "@typegoose/typegoose";
-  import { nanoid } from 'nanoid'
+ import { nanoid } from "nanoid";
   import argon2 from "argon2";
   import log from "../utils/logger";
   
-//   export const privateFields = [
-//     "password",
-//     "__v",
-//     "verificationCode",
-//     "passwordResetCode",
-//     "verified",
-//   ];
+  export const privateFields = [
+    "password",
+    "__v",
+    "verificationCode",
+    "passwordResetCode",
+    "verified",
+  ];
   
   @pre<User>("save", async function () {
     if (!this.isModified("password")) {
@@ -30,7 +30,7 @@ import {
   
     return;
   })
-//   @index({ email: 1 })
+  @index({ email: 1 })
   @modelOptions({
     schemaOptions: {
       timestamps: true,
@@ -52,7 +52,7 @@ import {
     @prop({ required: true })
     password: string;
   
-    @prop({ required: true,  default:( ) => nanoid() })
+    @prop({ required: true,  default:( ) => nanoid(5) })
     verificationCode: string;
   
     @prop()

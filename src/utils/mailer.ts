@@ -1,13 +1,14 @@
 import nodemailer, { SendMailOptions } from "nodemailer";
 import config from "config";
-import  log  from "console";
+import log from "./logger";
 
-//  async function createTestCreds(){
-//     const creds =  await nodemailer.createTestAccount();
-//     console.log({creds})
+// async function createTestCreds() {
+//   const creds = await nodemailer.createTestAccount();
+//   console.log({ creds });
 // }
-// createTestCreds()
-  
+
+// createTestCreds();
+
 const smtp = config.get<{
   user: string;
   pass: string;
@@ -20,6 +21,7 @@ const transporter = nodemailer.createTransport({
   ...smtp,
   auth: { user: smtp.user, pass: smtp.pass },
 });
+
 async function sendEmail(payload: SendMailOptions) {
   transporter.sendMail(payload, (err, info) => {
     if (err) {
