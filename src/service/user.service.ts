@@ -1,4 +1,4 @@
-import { partial } from "lodash";
+
 import UserModel, { User } from "../model/user.model";
 
 export function createUser(input:Partial<User>){
