@@ -1,13 +1,16 @@
 require('dotenv').config()
-import  Express from "express"
+import  express from "express"
 import  config  from "config"
 import connectToDB from "./utils/connect-to-DB"
 import log from "./utils/logger"
 import router from "./routes/intex"
 
-const app = Express()
+const app = express()
 
-app.use(router)
+app.use(express.json());
+
+app.use(router);
+
 
 const PORT = config.get('PORT')
 

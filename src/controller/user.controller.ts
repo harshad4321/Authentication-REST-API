@@ -12,7 +12,12 @@ export async function createUserHandler(
 
     try{
 const user =await  createUser(body);
-await sendEmail()
+await sendEmail({
+   to: user.email,
+   from: "testsample@example.com",
+   subject: "Verify your email",
+   text: `verification code: ${user.verificationCode}. Id: ${user._id}`,
+ });
  
    return res.send("User successully created")
     }catch(e:any){
@@ -23,3 +28,4 @@ await sendEmail()
     }
 
 }
+
