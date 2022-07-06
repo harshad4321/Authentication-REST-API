@@ -56,12 +56,12 @@ import { size } from "lodash";
   
     @prop({ required: true  })
     verificationCode: string;
-  
+   
     @prop()
     passwordResetCode: string | null;
   
     @prop({ default: false })
-    verified: boolean;
+    verified: boolean; 
   
     async validatePassword(this: DocumentType<User>, candidatePassword: string) {
       try {

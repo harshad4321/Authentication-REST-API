@@ -105,7 +105,7 @@ export async function forgotPasswordHandler(
   });
 
   log.debug(`Password reset email sent to ${email}`);
-
+ 
   return res.send(message);
 }
 
