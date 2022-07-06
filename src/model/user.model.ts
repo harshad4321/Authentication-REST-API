@@ -10,6 +10,8 @@ import {
  import { nanoid } from "nanoid";
   import argon2 from "argon2";
   import log from "../utils/logger";
+import { number, string } from "zod";
+import { size } from "lodash";
   
   export const privateFields = [
     "password",
@@ -52,7 +54,7 @@ import {
     @prop({ required: true })
     password: string;
   
-    @prop({ required: true,  default:( ) => nanoid(5) })
+    @prop({ required: true  })
     verificationCode: string;
   
     @prop()

@@ -8,7 +8,7 @@ import router from "./routes/intex"
 const app = express()
 
 app.use(express.json());
-
+ 
 app.use(router);
 
 

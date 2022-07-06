@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { nanoid } from "nanoid";
+// import { nanoid } from "nanoid";
 import {
   CreateUserInput,
   ForgotPasswordInput,
@@ -12,7 +12,7 @@ import {
   findUserById,
 } from "../service/user.service";
 import log from "../utils/logger";
-import { sendEmail } from "../utils/mailer";
+import  sendEmail  from "../utils/mailer";
 
 export async function createUserHandler(
   req: Request<{}, {}, CreateUserInput>,
@@ -91,9 +91,9 @@ export async function forgotPasswordHandler(
     return res.send("User is not verified");
   }
 
-  const passwordResetCode = nanoid();
+  // const passwordResetCode = nanoid();
 
-  user.passwordResetCode =  passwordResetCode;
+  const passwordResetCode: any = user.passwordResetCode 
 
   await user.save();
 

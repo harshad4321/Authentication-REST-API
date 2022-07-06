@@ -19,8 +19,7 @@ router.post("/api/users/verify/:id/:verificationCode",
     validateResourse(forgotPasswordSchema),
     forgotPasswordHandler
   );
-  router.post(
-    "/api/users/resetpassword/:id/:passwordResetCode",
+  router.post("/api/users/resetpassword/:id/:passwordResetCode",
     validateResourse(resetPasswordSchema),
     resetPasswordHandler
   );
