@@ -1,5 +1,6 @@
 import express  from "express";
-import { createUserHandler, forgotPasswordHandler, resetPasswordHandler, verifyUserHandler } from "../controller/user.controller";
+import { createUserHandler, forgotPasswordHandler, getCurrentUserHandler, resetPasswordHandler, verifyUserHandler } from "../controller/user.controller";
+import requireUser from "../middleware/requireUser";
 import validateResourse from "../middleware/validateResourse";
 
 import { createUserSchema, forgotPasswordSchema, resetPasswordSchema, verifyUserSchema } from "../schema/user.schema";
@@ -23,5 +24,6 @@ router.post("/api/users/verify/:id/:verificationCode",
     validateResourse(resetPasswordSchema),
     resetPasswordHandler
   );
-
+  router.get("/api/users/me",requireUser, getCurrentUserHandler);
 export default router;
+

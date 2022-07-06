@@ -17,7 +17,7 @@ import { size } from "lodash";
     "password",
     "__v",
     "verificationCode",
-    "passwordResetCode",
+    "passwordResetCode",  
     "verified",
   ];
   
